@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white font-sans text-[#0F1728] antialiased;
+  }
+
+  ::selection {
+    background: rgba(79, 140, 255, 0.2);
+  }
+}
+
+@layer components {
+  .section-shell {
+    @apply relative overflow-hidden px-6 py-24 md:px-10 md:py-28 lg:px-12 lg:py-[120px];
+  }
+
+  .section-inner {
+    @apply mx-auto max-w-proposal;
+  }
+
+  .eyebrow {
+    @apply mb-4 inline-flex text-[11px] font-bold uppercase tracking-[0.18em];
+  }
+
+  .headline-xl {
+    @apply text-[40px] font-[900] leading-[0.94] tracking-display sm:text-[52px] lg:text-[76px];
+  }
+
+  .headline-lg {
+    @apply text-[34px] font-[900] leading-[0.96] tracking-display sm:text-[42px] lg:text-[58px];
+  }
+
+  .copy-lg {
+    @apply text-base leading-7 sm:text-lg;
+  }
+
+  .glass-dark {
+    @apply border border-white/10 bg-white/[0.04] backdrop-blur-sm;
+  }
+
+  .print-avoid {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
+
+@media print {
+  @page {
+    size: letter portrait;
+    margin: 0.45in;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .print-hide {
+    display: none !important;
+  }
+
+  .section-shell {
+    @apply overflow-visible px-0 py-10;
+    break-inside: auto;
+    page-break-inside: auto;
+  }
+
+  .headline-xl {
+    font-size: 28pt !important;
+  }
+
+  .headline-lg {
+    font-size: 22pt !important;
+  }
+
+  .copy-lg {
+    font-size: 10.5pt !important;
+    line-height: 1.45 !important;
+  }
+
+  .glass-dark {
+    background: rgba(255, 255, 255, 0.06) !important;
+    backdrop-filter: none !important;
+  }
+
+  .print-stack {
+    grid-template-columns: 1fr !important;
+  }
+
+  .print-two {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
