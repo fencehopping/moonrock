@@ -400,7 +400,7 @@ export default function App() {
       <Section tone="light">
         <HeadlineBlock
           eyebrow="Platform ladder"
-          title="There are 4 levels of what this can become"
+          title="Let's break this into 4 levels of deliverables and complexity."
           subtitle="Each level adds more personalization, operational power, scalability, and long-term value."
         />
         <ProgressLadder steps={ladderSteps} />

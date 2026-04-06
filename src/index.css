@@ -54,7 +54,7 @@
 @media print {
   @page {
     size: letter portrait;
-    margin: 0.45in;
+    margin: 0.8in 0.7in 0.8in 0.8in;
   }
 
   html,
@@ -65,16 +65,30 @@
   body {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
+    margin: 0 !important;
   }
 
   .print-hide {
     display: none !important;
   }
 
+  #root {
+    padding-left: 0.12in !important;
+    padding-right: 0.08in !important;
+  }
+
   .section-shell {
-    @apply overflow-visible px-0 py-10;
+    @apply overflow-visible py-10;
+    padding-left: 0.28in !important;
+    padding-right: 0.24in !important;
     break-inside: auto;
     page-break-inside: auto;
+  }
+
+  .section-inner {
+    max-width: none !important;
+    padding-left: 0.02in !important;
+    padding-right: 0.02in !important;
   }
 
   .headline-xl {
