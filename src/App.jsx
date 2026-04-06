@@ -8,12 +8,13 @@ import HeadlineBlock from "./components/HeadlineBlock";
 import ProgressLadder from "./components/ProgressLadder";
 import { Reveal, RevealGroup, fadeUp } from "./components/Reveal";
 import Section from "./components/Section";
+import TierExplanationCallout from "./components/TierExplanationCallout";
 import TierSection from "./components/TierSection";
 
 const gapCards = [
   "Information is fragmented",
   "Decisions feel high-stakes",
-  "Support disappears between touchpoints",
+  "Support is often tied to scheduled moments",
   "Progress is hard to see or sustain",
 ];
 
@@ -135,26 +136,53 @@ const tierThreeSections = [
   },
 ];
 
+const tierExplanations = {
+  level1: {
+    label: "In simple terms",
+    text: "Think of this like a really well-organized website. Parents can open it on their phone, read helpful information, and follow simple step-by-step guidance. But the system does not remember who they are, so every visit starts fresh.",
+  },
+  level2: {
+    label: "In simple terms",
+    text: "Now the system starts to remember you. Parents can create an account, come back to where they left off, and receive reminders or follow-up communication. It feels more personal and more useful over time.",
+  },
+  level3: {
+    label: "In simple terms",
+    text: "Now your team gets control behind the scenes. Instead of needing a developer every time something changes, your team can update content, adjust the experience, and see how people are using it. It becomes something you can actively run and improve.",
+  },
+  level4: {
+    label: "In simple terms",
+    text: "Now this becomes a full long-term digital system. Parents can use dedicated apps on their phones, the platform can connect with other tools, and the whole experience is built to grow over time. This is the version designed for scale.",
+  },
+};
+
 const ongoingCosts = [
   {
-    tier: "Tier 1",
+    title: "Level 1 — Content Experience",
+    label: "Very minimal",
     cost: "~$10–$50/month",
-    notes: "Minimal hosting, simple deployment, low operational complexity.",
+    bullets: ["Basic hosting", "Simple deployment"],
+    description: "Just enough to keep the website live.",
   },
   {
-    tier: "Tier 2",
-    cost: "~$100–$500/month",
-    notes: "Database, authentication, email or SMS tools, analytics, and user data storage.",
+    title: "Level 2 — Tracked Experience",
+    label: "Adds user functionality",
+    cost: "~$100–$300/month",
+    bullets: ["Secure user accounts", "Data storage", "Email / SMS tools"],
+    description: "Covers the basics needed to support users and stay in touch with them.",
   },
   {
-    tier: "Tier 3",
-    cost: "~$300–$1,000/month",
-    notes: "Admin systems, expanded automation, deeper analytics, more storage, and operational tooling.",
+    title: "Level 3 — Managed Platform",
+    label: "Supports internal operations",
+    cost: "~$200–$800/month",
+    bullets: ["Admin tools", "Analytics", "Automation systems"],
+    description: "Powers the system your team uses to manage and improve the experience.",
   },
   {
-    tier: "Tier 4",
-    cost: "~$500–$2,000+/month",
-    notes: "Native app support, advanced backend infrastructure, integrations, monitoring, and higher-scale operations.",
+    title: "Level 4 — Full Ecosystem",
+    label: "Built for scale",
+    cost: "~$300–$1,500+/month",
+    bullets: ["Mobile apps", "Integrations", "More robust infrastructure"],
+    description: "Supports a more advanced platform as usage and complexity grow.",
   },
 ];
 
@@ -199,10 +227,10 @@ const futureCards = [
   },
 ];
 
-function ScrollCue() {
+function ScrollCue({ label = "Scroll to see the platform roadmap" }) {
   return (
     <div className="print-hide mt-16 flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.18em] text-slateSoft">
-      <span>Scroll to explore</span>
+      <span>{label}</span>
       <motion.span
         animate={{ y: [0, 6, 0] }}
         transition={{ duration: 1.8, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
@@ -237,40 +265,71 @@ export default function App() {
     <div className="bg-white">
       <PrintHeader />
 
-      <Section tone="dark" className="pb-28 pt-20 md:pb-32 md:pt-24">
-        <div className="grid items-end gap-16 lg:grid-cols-[1.05fr,0.95fr]">
-          <Reveal>
-            <div className="eyebrow text-accent">Proposal narrative</div>
-            <h1 className="headline-xl max-w-[760px] text-white">Support doesn’t stop after the session</h1>
-            <p className="copy-lg mt-6 max-w-[620px] text-white">
-              Parents need guidance in the moments that matter most.
-            </p>
-            <p className="copy-lg mt-6 max-w-[670px] text-slateSoft">
-              The challenge isn’t the program. It’s what happens in between. Families leave with clarity,
-              then return to uncertainty, isolation, and high-pressure decisions.
-            </p>
-            <ScrollCue />
-          </Reveal>
+      <Section tone="dark" className="flex min-h-[88vh] items-center pb-24 pt-20 md:pb-28 md:pt-24">
+        <div className="grid items-center gap-16 lg:grid-cols-[1.08fr,0.92fr]">
+          <RevealGroup className="max-w-[760px]">
+            <motion.div variants={fadeUp}>
+              <div className="eyebrow text-accent">Proposal Narrative</div>
+            </motion.div>
 
-          <Reveal className="print-avoid">
-            <div className="relative rounded-[32px] border border-white/10 bg-white/[0.04] p-6 shadow-glow">
-              <div className="absolute right-5 top-5 h-20 w-20 rounded-full bg-accent/20 blur-2xl print-hide" />
-              <div className="grid gap-4 md:grid-cols-2">
-                <div className="rounded-[24px] border border-white/10 bg-white/[0.04] p-5">
-                  <div className="text-[11px] font-bold uppercase tracking-[0.16em] text-accent">Problem</div>
-                  <div className="mt-3 text-2xl font-bold tracking-[-0.04em] text-white">Between-session support gap</div>
-                  <div className="mt-4 h-px bg-white/10" />
-                  <div className="mt-4 text-sm leading-7 text-slateSoft">
-                    A strong program still leaves families alone during the moments where choices, panic, and confusion spike.
-                  </div>
+            <motion.h1 variants={fadeUp} className="headline-xl max-w-[760px] text-white">
+              The hardest moments don’t happen in the room.
+            </motion.h1>
+
+            <motion.p variants={fadeUp} className="mt-8 max-w-[720px] text-[21px] leading-9 text-white/88 md:text-[24px] md:leading-10">
+              Support is often delivered in sessions, but the moments when parents need guidance don’t
+              always happen on a schedule.
+            </motion.p>
+
+            <motion.p variants={fadeUp} className="mt-7 max-w-[680px] text-[16px] leading-8 text-slateSoft">
+              This proposal outlines a digital platform designed to extend guidance beyond scheduled
+              interactions, so families have access to trusted support when they need it most.
+            </motion.p>
+
+            <motion.div variants={fadeUp} className="mt-8 max-w-[660px] rounded-[24px] border border-white/10 bg-white/[0.05] px-5 py-4">
+              <p className="text-[18px] font-semibold leading-8 tracking-[-0.03em] text-white md:text-[20px]">
+                What happens when a parent needs help right now — not at the next session?
+              </p>
+            </motion.div>
+
+            <motion.div variants={fadeUp}>
+              <ScrollCue />
+            </motion.div>
+          </RevealGroup>
+
+          <Reveal className="print-avoid lg:justify-self-end">
+            <div className="relative overflow-hidden rounded-[34px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03))] p-6 shadow-glow">
+              <div className="absolute right-[-18px] top-[-20px] h-32 w-32 rounded-full bg-accent/16 blur-3xl print-hide" />
+              <div className="absolute bottom-10 left-0 top-10 w-px bg-[linear-gradient(180deg,rgba(79,140,255,0.05),rgba(79,140,255,0.65),rgba(79,140,255,0.05))]" />
+
+              <div className="pl-6">
+                <div className="mb-6 text-[11px] font-bold uppercase tracking-[0.16em] text-accent">
+                  Where the gap appears
                 </div>
-                <div className="rounded-[24px] border border-white/10 bg-white/[0.04] p-5">
-                  <div className="text-[11px] font-bold uppercase tracking-[0.16em] text-accent">Proposal</div>
-                  <div className="mt-3 text-2xl font-bold tracking-[-0.04em] text-white">A system, not a brochure</div>
-                  <div className="mt-4 grid gap-3">
-                    <div className="h-3 w-[78%] rounded-full bg-accent" />
-                    <div className="h-3 w-[58%] rounded-full bg-white/20" />
-                    <div className="h-3 w-[86%] rounded-full bg-accent" />
+
+                <div className="space-y-4">
+                  <div className="rounded-[24px] border border-white/10 bg-white/[0.04] p-5">
+                    <div className="text-[11px] font-bold uppercase tracking-[0.16em] text-accent">Scheduled support</div>
+                    <div className="mt-3 text-[24px] font-bold tracking-[-0.04em] text-white">Guidance is structured</div>
+                    <p className="mt-3 text-[15px] leading-7 text-slateSoft">
+                      Support can be thoughtful and effective within planned interactions.
+                    </p>
+                  </div>
+
+                  <div className="rounded-[24px] border border-white/10 bg-white/[0.04] p-5">
+                    <div className="text-[11px] font-bold uppercase tracking-[0.16em] text-accent">Real-life moment</div>
+                    <div className="mt-3 text-[24px] font-bold tracking-[-0.04em] text-white">Needs do not arrive on a schedule</div>
+                    <p className="mt-3 text-[15px] leading-7 text-slateSoft">
+                      Important questions can surface later, in everyday situations, under pressure.
+                    </p>
+                  </div>
+
+                  <div className="rounded-[24px] border border-white/10 bg-white/[0.04] p-5">
+                    <div className="text-[11px] font-bold uppercase tracking-[0.16em] text-accent">Opportunity</div>
+                    <div className="mt-3 text-[24px] font-bold tracking-[-0.04em] text-white">Trusted guidance should stay accessible</div>
+                    <p className="mt-3 text-[15px] leading-7 text-slateSoft">
+                      The platform keeps support available in real-time moments, not only at the next scheduled touchpoint.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -283,28 +342,28 @@ export default function App() {
         <HeadlineBlock
           dark
           eyebrow="The gap"
-          title="The breakdown happens between sessions"
-          subtitle="Today, support is often time-bound, difficult to revisit, and hard to scale. Parents are left navigating emotionally charged decisions without a reliable system to guide them in real time."
+          title="Support is structured, but real-life needs are not"
+          subtitle="Support is often designed around scheduled interactions, while important decisions happen in real time. That gap is normal, and it is exactly what a digital layer can help address."
         />
 
         <div className="mt-12 grid gap-10 lg:grid-cols-[0.88fr,1.12fr]">
           <Reveal className="print-avoid rounded-[30px] border border-white/10 bg-white/[0.04] p-8">
             <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-accent">Why this matters</div>
             <p className="mt-6 text-[19px] leading-9 text-white">
-              Sessions create clarity. But without a system that parents can revisit later, that clarity decays
-              under stress.
+              Support can be structured and effective in planned moments. But real-life decisions happen continuously,
+              which creates a gap between when guidance is delivered and when it is needed.
             </p>
             <div className="mt-10 rounded-[24px] border border-white/10 bg-[#121827] p-5">
               <div className="flex items-center justify-between text-sm font-semibold text-white">
-                <span>Pressure between visits</span>
-                <span>High</span>
+                <span>Need for guidance over time</span>
+                <span>Ongoing</span>
               </div>
               <div className="mt-4 h-3 rounded-full bg-white/10">
                 <div className="h-3 w-[82%] rounded-full bg-[linear-gradient(90deg,#7AA7FF_0%,#4F8CFF_100%)]" />
               </div>
               <div className="mt-4 flex justify-between text-[11px] font-bold uppercase tracking-[0.14em] text-slateSoft">
-                <span>Low clarity</span>
-                <span>High stakes</span>
+                <span>Scheduled support</span>
+                <span>Real-time need</span>
               </div>
             </div>
           </Reveal>
@@ -315,7 +374,7 @@ export default function App() {
                 key={card}
                 eyebrow={`0${index + 1}`}
                 title={card}
-                body="A parent-facing product should reduce friction here, not simply add more information."
+                body="A parent-facing product should make trusted guidance easier to access when it is needed most."
                 tone="dark"
               />
             ))}
@@ -327,13 +386,13 @@ export default function App() {
         <HeadlineBlock
           eyebrow="Reframe"
           title="This isn’t about building an app"
-          subtitle="It’s about building a system of support that exists between, around, and beyond your sessions."
+          subtitle="It’s about building a system of support that exists between interactions, around everyday decisions, and over time."
           titleClassName="headline-lg"
         />
         <Reveal className="mt-10 max-w-[760px]">
           <p className="copy-lg text-[#566074]">
             The opportunity is not just to digitize information. It is to create a guided experience that helps
-            parents learn, make decisions, stay engaged, and feel supported over time.
+            parents learn, make decisions, stay engaged, and access trusted support in real-time moments.
           </p>
         </Reveal>
       </Section>
@@ -358,6 +417,7 @@ export default function App() {
           body="Tier 1 focuses on delivering a clean, mobile-friendly web experience centered around your core educational and support content. It is intentionally lightweight, with no logins, no saved data, and no administrative backend."
           sections={tierOneSections}
           mockup={<DeviceMockup variant="content" />}
+          explanation={tierExplanations.level1}
         />
       </Section>
 
@@ -381,6 +441,7 @@ export default function App() {
               ]}
             />
           }
+          explanation={tierExplanations.level2}
         />
       </Section>
 
@@ -395,6 +456,7 @@ export default function App() {
           body="Tier 3 adds the administrative and operational layer needed to manage content, evolve the experience, and support scale without relying on developers for every change."
           sections={tierThreeSections}
           mockup={<AdminDashboardMockup />}
+          explanation={tierExplanations.level3}
           emphasized
         />
       </Section>
@@ -451,29 +513,34 @@ export default function App() {
             />
           </RevealGroup>
         </div>
+
+        <div className="mt-10">
+          <TierExplanationCallout
+            label={tierExplanations.level4.label}
+            text={tierExplanations.level4.text}
+            tone="light"
+          />
+        </div>
       </Section>
 
       <Section tone="dark">
         <HeadlineBlock
           dark
           eyebrow="Ongoing costs"
-          title="As the platform grows, so does what powers it"
-          subtitle="Higher tiers do not just add features. They add the behind-the-scenes systems required to store data, manage users, deliver communications, support staff workflows, and keep everything reliable over time."
+          title="Simple, predictable operating costs"
+          subtitle="As the platform grows, there are small ongoing costs to keep everything running smoothly, like hosting, data storage, and communication tools. These are standard for modern digital products and typically scale gradually with usage."
         />
 
         <RevealGroup className="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-4 print-two">
           {ongoingCosts.map((item) => (
-            <CostCard key={item.tier} {...item} />
+            <CostCard key={item.title} {...item} />
           ))}
         </RevealGroup>
 
         <Reveal className="mt-10 max-w-4xl">
           <p className="text-[17px] leading-8 text-white">
-            These are not just maintenance costs. They are what make reliability, engagement, scalability,
-            and long-term ownership possible.
-          </p>
-          <p className="mt-4 text-[14px] leading-7 text-slateSoft">
-            Actual costs depend on usage, communication volume, infrastructure choices, and long-term roadmap decisions.
+            These costs are flexible and scale with usage. Most organizations start small and grow into higher tiers
+            over time. There is no need to overbuild upfront.
           </p>
         </Reveal>
       </Section>
