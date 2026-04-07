@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import AdminDashboardMockup from "./components/AdminDashboardMockup";
 import ComparisonTable from "./components/ComparisonTable";
-import CostCard from "./components/CostCard";
 import DeviceMockup from "./components/DeviceMockup";
 import FeatureCard from "./components/FeatureCard";
 import HeadlineBlock from "./components/HeadlineBlock";
@@ -10,13 +9,6 @@ import { Reveal, RevealGroup, fadeUp } from "./components/Reveal";
 import Section from "./components/Section";
 import TierExplanationCallout from "./components/TierExplanationCallout";
 import TierSection from "./components/TierSection";
-
-const gapCards = [
-  "Information is fragmented",
-  "Decisions feel high-stakes",
-  "Support is often tied to scheduled moments",
-  "Progress is hard to see or sustain",
-];
 
 const ladderSteps = [
   {
@@ -155,37 +147,6 @@ const tierExplanations = {
   },
 };
 
-const ongoingCosts = [
-  {
-    title: "Level 1 — Content Experience",
-    label: "Very minimal",
-    cost: "~$10–$50/month",
-    bullets: ["Basic hosting", "Simple deployment"],
-    description: "Just enough to keep the website live.",
-  },
-  {
-    title: "Level 2 — Tracked Experience",
-    label: "Adds user functionality",
-    cost: "~$100–$300/month",
-    bullets: ["Secure user accounts", "Data storage", "Email / SMS tools"],
-    description: "Covers the basics needed to support users and stay in touch with them.",
-  },
-  {
-    title: "Level 3 — Managed Platform",
-    label: "Supports internal operations",
-    cost: "~$200–$800/month",
-    bullets: ["Admin tools", "Analytics", "Automation systems"],
-    description: "Powers the system your team uses to manage and improve the experience.",
-  },
-  {
-    title: "Level 4 — Full Ecosystem",
-    label: "Built for scale",
-    cost: "~$300–$1,500+/month",
-    bullets: ["Mobile apps", "Integrations", "More robust infrastructure"],
-    description: "Supports a more advanced platform as usage and complexity grow.",
-  },
-];
-
 const comparisonRows = [
   { label: "Responsive web app", values: [true, true, true, true] },
   { label: "Educational modules", values: [true, true, true, true] },
@@ -288,7 +249,7 @@ export default function App() {
 
             <motion.div variants={fadeUp} className="mt-8 max-w-[660px] rounded-[24px] border border-white/10 bg-white/[0.05] px-5 py-4">
               <p className="text-[18px] font-semibold leading-8 tracking-[-0.03em] text-white md:text-[20px]">
-                What happens when a parent needs help right now — not at the next session?
+                What happens when a parent needs help right now, not at the next session?
               </p>
             </motion.div>
 
@@ -339,62 +300,28 @@ export default function App() {
       </Section>
 
       <Section tone="dark" className="pt-0">
-        <HeadlineBlock
-          dark
-          eyebrow="The gap"
-          title="Support is structured, but real-life needs are not"
-          subtitle="Support is often designed around scheduled interactions, while important decisions happen in real time. That gap is normal, and it is exactly what a digital layer can help address."
-        />
+        <div className="max-w-[780px]">
+          <HeadlineBlock dark title="Support is structured. Real life isn’t." />
 
-        <div className="mt-12 grid gap-10 lg:grid-cols-[0.88fr,1.12fr]">
-          <Reveal className="print-avoid rounded-[30px] border border-white/10 bg-white/[0.04] p-8">
-            <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-accent">Why this matters</div>
-            <p className="mt-6 text-[19px] leading-9 text-white">
-              Support can be structured and effective in planned moments. But real-life decisions happen continuously,
-              which creates a gap between when guidance is delivered and when it is needed.
+          <Reveal className="mt-8 max-w-[720px]" delay={0.04}>
+            <p className="copy-lg text-slateSoft">
+              Support is often delivered in scheduled moments: sessions, meetings, conversations. These are
+              valuable, but they can’t cover every situation a parent faces in real time.
             </p>
-            <div className="mt-10 rounded-[24px] border border-white/10 bg-[#121827] p-5">
-              <div className="flex items-center justify-between text-sm font-semibold text-white">
-                <span>Need for guidance over time</span>
-                <span>Ongoing</span>
-              </div>
-              <div className="mt-4 h-3 rounded-full bg-white/10">
-                <div className="h-3 w-[82%] rounded-full bg-[linear-gradient(90deg,#7AA7FF_0%,#4F8CFF_100%)]" />
-              </div>
-              <div className="mt-4 flex justify-between text-[11px] font-bold uppercase tracking-[0.14em] text-slateSoft">
-                <span>Scheduled support</span>
-                <span>Real-time need</span>
-              </div>
-            </div>
           </Reveal>
 
-          <RevealGroup className="grid gap-4">
-            {gapCards.map((card, index) => (
-              <FeatureCard
-                key={card}
-                eyebrow={`0${index + 1}`}
-                title={card}
-                body="A parent-facing product should make trusted guidance easier to access when it is needed most."
-                tone="dark"
-              />
-            ))}
-          </RevealGroup>
-        </div>
-      </Section>
+          <Reveal className="mt-12 max-w-[760px]" delay={0.12}>
+            <p className="text-[24px] font-semibold leading-9 tracking-[-0.03em] text-accent md:text-[28px] md:leading-10">
+              What happens when a parent needs help right now, not at the next session?
+            </p>
+          </Reveal>
 
-      <Section tone="light">
-        <HeadlineBlock
-          eyebrow="Reframe"
-          title="This isn’t about building an app"
-          subtitle="It’s about building a system of support that exists between interactions, around everyday decisions, and over time."
-          titleClassName="headline-lg"
-        />
-        <Reveal className="mt-10 max-w-[760px]">
-          <p className="copy-lg text-[#566074]">
-            The opportunity is not just to digitize information. It is to create a guided experience that helps
-            parents learn, make decisions, stay engaged, and access trusted support in real-time moments.
-          </p>
-        </Reveal>
+          <Reveal className="mt-12" delay={0.18}>
+            <p className="text-[14px] font-semibold uppercase tracking-[0.18em] text-white/58">
+              That’s the gap this platform is designed to fill.
+            </p>
+          </Reveal>
+        </div>
       </Section>
 
       <Section tone="light">
@@ -524,25 +451,39 @@ export default function App() {
       </Section>
 
       <Section tone="dark">
-        <HeadlineBlock
-          dark
-          eyebrow="Ongoing costs"
-          title="Simple, predictable operating costs"
-          subtitle="As the platform grows, there are small ongoing costs to keep everything running smoothly, like hosting, data storage, and communication tools. These are standard for modern digital products and typically scale gradually with usage."
-        />
+        <div className="max-w-[760px]">
+          <HeadlineBlock
+            dark
+            eyebrow="Ongoing costs"
+            title="Simple, scalable operating costs"
+            subtitle="As the platform grows, there are some ongoing costs to keep everything running smoothly: things like hosting, data storage, and communication tools."
+          />
 
-        <RevealGroup className="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-4 print-two">
-          {ongoingCosts.map((item) => (
-            <CostCard key={item.title} {...item} />
-          ))}
-        </RevealGroup>
+          <Reveal className="mt-6 max-w-[720px]">
+            <p className="text-[16px] leading-8 text-slateSoft">
+              These are standard for any modern digital product and scale based on how the platform is used.
+            </p>
+          </Reveal>
 
-        <Reveal className="mt-10 max-w-4xl">
-          <p className="text-[17px] leading-8 text-white">
-            These costs are flexible and scale with usage. Most organizations start small and grow into higher tiers
-            over time. There is no need to overbuild upfront.
-          </p>
-        </Reveal>
+          <Reveal className="mt-10 max-w-[720px]">
+            <div className="text-[12px] font-bold uppercase tracking-[0.18em] text-accent">
+              Typical factors that influence these costs include:
+            </div>
+            <ul className="mt-5 space-y-3 text-[16px] leading-8 text-white/88">
+              <li>Number of users on the platform</li>
+              <li>How much content and data is stored</li>
+              <li>Use of email or SMS communication</li>
+              <li>Level of platform complexity and integrations</li>
+            </ul>
+          </Reveal>
+
+          <Reveal className="mt-10 max-w-[740px]">
+            <p className="text-[15px] leading-8 text-slateSoft">
+              In most cases, these costs start small and grow gradually over time. We’ll align on the right setup
+              based on your needs, usage, and long-term goals.
+            </p>
+          </Reveal>
+        </div>
       </Section>
 
       <Section tone="light">

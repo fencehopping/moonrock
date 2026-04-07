@@ -5,7 +5,7 @@ function Cell({ value }) {
     return <span className="text-lg font-bold text-accent">✓</span>;
   }
 
-  return <span className="text-base font-semibold text-[#C2CBD9]">—</span>;
+  return <span className="text-base font-semibold text-[#C2CBD9]">-</span>;
 }
 
 export default function ComparisonTable({ rows }) {
